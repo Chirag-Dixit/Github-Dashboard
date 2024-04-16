@@ -2,23 +2,31 @@ import { Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Left from "./Left";
+import { setUrl } from "../../redux/repos_url/action";
+import { setName } from '../../redux/userRepo/action'
+import { connect } from "react-redux";
 
 const User = (props) => {
-  const accessToken = "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";
-  const { values } = props;
+  const accessToken = "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";
+  const { values, setUrl, setName } = props;
   const { login, url } = values;
   const [repoCount, setRepoCount] = useState(0);
+  const [dataArr, setDataArr] = useState([])
 
   const getRepoCount = async () => {
     const response = await fetch(url, {
       headers: { Authorization: `token ${accessToken}` },
     });
     const data = await response.json();
-    console.log(data.public_repos);
+    setDataArr(data)
+    // console.log(dataArr);
     setRepoCount(data.public_repos);
-  };
-
+  };  
   getRepoCount();
+  const handleClick = () => {
+    setUrl(dataArr.repos_url)
+    setName(dataArr.login)
+  }
 
   return (
     <Stack
@@ -28,11 +36,12 @@ const User = (props) => {
       // spacing={20}
       justifyContent="space-between"
       textAlign="left"
+      width='fitContent'
     >
-      <Link>{login}</Link>
+      <Link to={`/users/${login}`} onClick={handleClick}>{login}</Link>
       <Stack
         direction="row"
-        spacing={2}
+        // spacing={2}
         // justifyContent="space-between"
         textAlign="left"
         width='22%'
@@ -44,4 +53,17 @@ const User = (props) => {
   );
 };
 
-export default User;
+const mapStateToProps = state => {
+  return{
+    url: state.url.url
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    setUrl: (data) => dispatch(setUrl(data)),
+    setName: (data) => dispatch(setName(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);
