@@ -5,6 +5,9 @@ import Navbar from './components/Navbar';
 import Lobby from './components/Lobby';
 import { Provider } from 'react-redux';
 import store from "./redux/store";
+import UserDashboard from './components/Dashboard/UserDashboard'
+import SignUp from './components/Auth/SignUp';
+import Login from './components/Auth/Login';
 
 function App() {
   return (
@@ -14,6 +17,9 @@ function App() {
         <Routes>
           <Route path='/' element={<Main/>}/>
           <Route path='lobby' element={<Lobby />}/>
+          <Route path='users/:userId' element={<UserDashboard />}/>
+          <Route path='login' element={<Login/>}/>
+          <Route path='signup' element={<SignUp/>}/>
         </Routes>
       </div>
     </Provider>

@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Loading from "../Loading";
 
 const Left = (props) => {
-  const accessToken = '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'
+  const accessToken = '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'
   const { setSearchUsers } = props;
   const [input, setInput] = useState("");
   // const [val, setVal] = useState("");
@@ -77,12 +77,12 @@ const Left = (props) => {
       />
       {loading ? <Loading /> : ":)"}
       <Button onClick={handleSearch}>Search</Button>
-      <Stack direction="column">
+      {/* <Stack direction="column">
         <Typography variant="subtitle1">Recent Search</Typography>
         <Typography variant="subtitle1">Recent Search</Typography>
         <Typography variant="subtitle1">Recent Search</Typography>
         <Typography variant="subtitle1">Recent Search</Typography>
-      </Stack>
+      </Stack> */}
 
       <Stack direction="row">
         <Button onClick={nextPage}>next</Button>
